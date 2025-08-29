@@ -9,13 +9,25 @@ class Layout extends BaseController
 {
 	private $table = 'layout';
 	private $id = 'id_layout';
+	protected $encrypter;
+
+	public function __construct()
+	{
+		$this->encrypter = \Config\Services::encrypter();
+	}
 
 	public function index()
 	{
 		$model = new MyModel('layout');
 		$data = [
 			'title' => 'Data Urutan Tampilan',
-			'getLayout' => $model->getAllData('urutan', 'asc')
+			'getLayout' => $model->query("
+				SELECT l.*, p.nama_page, st.nama_template, st.icon, st.category
+				FROM layout l
+				LEFT JOIN page_builder p ON l.id_page = p.id_page
+				LEFT JOIN section_templates st ON l.id_template = st.id_template
+				ORDER BY l.id_page ASC, l.urutan ASC
+			")
 		];
 		return view('Modules\Layout\Views\v_layout', $data);
 	}

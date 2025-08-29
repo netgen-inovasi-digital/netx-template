@@ -31,11 +31,6 @@ class Mitra extends BaseController
 		$data['id'] = $idenc;
 		$data['nama'] = $get->nama;
 
-		$where = [
-			'id_mitra' => $id,
-		];
-		$get = $model->getAllDataById($where);
-
 		return $this->response->setJSON($data);
 	}
 
@@ -114,7 +109,7 @@ class Mitra extends BaseController
 
     public function dataList()
     {
-        $model = new MitraModel;
+        $model = new MyModel($this->table);
 		$data = array();
 		$list = $model->getAllData();
         foreach ($list as $row) 

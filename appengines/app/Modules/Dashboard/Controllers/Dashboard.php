@@ -11,7 +11,9 @@ class Dashboard extends BaseController
 	{
 		$data = $this->getDashboardData();
 		$data['title'] = 'Dashboard';
-		$data['content'] = 'Modules\Dashboard\Views\v_dashboard';
+		
+		// Render dashboard view as content variable for template
+		$data['content'] = view('Modules\Dashboard\Views\v_dashboard', $data);
 		return view('template', $data);
 	}
 
