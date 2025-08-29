@@ -9,13 +9,6 @@ class Layout extends BaseController
 {
 	private $table = 'layout';
 	private $id = 'id_layout';
-	private $encrypter;
-
-	public function __construct()
-	{
-		parent::__construct();
-		$this->encrypter = \Config\Services::encrypter();
-	}
 
 	public function index()
 	{
